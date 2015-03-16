@@ -89,7 +89,7 @@ public class Compare {
         {
             System.out.println("//" + "START:YOUNGEST_OUTPUT");
             people.stream()
-                    .min(Person::ageDifference)
+                    .min((person1, person2) -> person1.getAge() - person2.getAge())
                     .ifPresent(youngest -> System.out.println("Youngest: " + youngest));
             System.out.println("//" + "END:YOUNGEST_OUTPUT");
         }
@@ -112,16 +112,16 @@ public class Compare {
                             .sorted(comparing((Person person) -> person.getName()))
                             .collect(toList()));
 
-            final Function<Person, String> byName = person -> person.getName();
+            final Function<Person, String> byName = Person::getName;
             people.stream()
-                    .sorted(comparing(byName));
+                    .sorted(comparing(Person::getName));
         }
 
         {
             System.out.println("//" + "START:SORT_NAME_AND_AGE_OUTPUT");
 
-            final Function<Person, Integer> byAge = person -> person.getAge();
-            final Function<Person, String> byTheirName = person -> person.getName();
+            final Function<Person, Integer> byAge = Person::getAge;
+            final Function<Person, String> byTheirName = Person::getName;
 
             printPeople("Sorted in ascending order by age and name: ",
                     people.stream()

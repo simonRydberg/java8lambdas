@@ -32,7 +32,7 @@ public class AssetUtilRefactored {
         );
 
         System.out.println("Total of all assets: " +
-                totalAssetValues(assets, asset -> true));
+                totalAssetValues(assets, asset1 -> true));
 
         System.out.println("Total of bonds: " +
                 totalAssetValues(assets, asset -> asset.getType() == AssetType.BOND));

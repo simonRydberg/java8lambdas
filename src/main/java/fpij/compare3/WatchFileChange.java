@@ -15,11 +15,16 @@ import java.util.concurrent.TimeUnit;
 
 public class WatchFileChange {
     public static void main(String[] args) throws Exception {
-        new Thread(() -> watchFileChange()).start();
+        new Thread(WatchFileChange::watchFileChange).start();
         final File file = new File("sample.txt");
         file.createNewFile();
         Thread.sleep(5000);
         file.setLastModified(System.currentTimeMillis());
+        Thread.sleep(1000);
+        file.setLastModified(System.currentTimeMillis());
+        Thread.sleep(1000);
+        file.setLastModified(System.currentTimeMillis());
+
     }
 
     public static void watchFileChange() {
